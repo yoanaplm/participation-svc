@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -37,5 +38,10 @@ public class RegistrationController {
     @GetMapping("/activities/{activityId}/registrations")
     public ActivityRegistrationsResponse getSummary(@PathVariable UUID activityId){
         return registrationService.getSummary(activityId);
+    }
+
+    @GetMapping("/users/{userId}/registrations")
+    public List<RegistrationResponse> getForUser(@PathVariable UUID userId) {
+        return registrationService.getForUser(userId);
     }
 }

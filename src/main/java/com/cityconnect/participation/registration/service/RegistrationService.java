@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -90,6 +91,13 @@ public class RegistrationService {
                  registration.getActivityId(),
                  registration.getStatus(),
                  registration.getRegisteredAt());
+    }
+
+    @Transactional(readOnly = true)
+    public List<RegistrationResponse> getForUser(UUID userId) {
+        return registrationRepository.findAllByUser(userId).stream()
+                .map(this::toResponse)
+                .toList();
     }
 
 

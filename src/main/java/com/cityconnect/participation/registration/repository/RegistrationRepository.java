@@ -25,4 +25,8 @@ public interface RegistrationRepository extends JpaRepository<Registration, UUID
 
     @Query("select r from Registration as r where r.activityId = :activityId and r.status = :status order by r.registeredAt")
     List<Registration> findByActivityAndStatusOrdered(@Param("activityId") UUID activityId, @Param("status") RegistrationStatus status);
+
+    @Query("SELECT r FROM Registration r WHERE r.userId = :userId ORDER BY r.registeredAt DESC")
+    List<Registration> findAllByUser(@Param("userId") UUID userId);
+
 }
